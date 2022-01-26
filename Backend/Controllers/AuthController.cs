@@ -12,7 +12,7 @@ namespace Chatty.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    class AuthController : Controller
+    class AuthController : ControllerBase
     {
         AuthService authService;
         public AuthController(AuthService _authService)
@@ -26,7 +26,7 @@ namespace Chatty.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public IActionResult Login(UserRequestDTO userDto)
         {
             var user = new User()
@@ -42,7 +42,7 @@ namespace Chatty.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("Register")]
+        [HttpPost("register")]
         public IActionResult Register(UserRequestDTO userDto)
         {
             var user = new User()

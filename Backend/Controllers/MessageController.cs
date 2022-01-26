@@ -25,7 +25,7 @@ namespace Chatty.Controllers
             return Ok(messages);
         }
 
-        [HttpPost("add/{messageDTO}")]
+        [HttpPost("add")]
         public IActionResult Add(MessageDTO messageDTO)
         {   
             var contact = unitOfWork.GetContactRepository().FindById(messageDTO.ContactId);
@@ -43,7 +43,7 @@ namespace Chatty.Controllers
         }
 
         
-        [HttpPost("update/{messageDTO}")]
+        [HttpPost("update")]
         public IActionResult Update(MessageDTO messageDTO)
         {   
             var message = unitOfWork.GetMessageRepository().FindById(messageDTO.Id);
@@ -56,7 +56,7 @@ namespace Chatty.Controllers
             return Ok(unitOfWork.Save());
         }
 
-        [HttpPost("delete/{messageId}")]
+        [HttpPost("delete")]
         public IActionResult Delete(Guid messageId)
         {   
             var message = unitOfWork.GetMessageRepository().FindById(messageId);            
