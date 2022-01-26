@@ -18,24 +18,16 @@ namespace Chatty.Core
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //base.OnModelCreating(modelBuilder);
             builder.Entity<User>(entity =>
             {
                 entity.HasIndex(e => e.Email).IsUnique();
             });
-
-          
-
-            //CategorieIngrediente-Ingrediente
            
 
             builder.Entity<Contact>()
             .HasMany(m1 => m1.Messages)
             .WithOne(m2 => m2.Contact);
 
-
-
-            // Many to Many
 
             builder.Entity<Contact>()
                    .HasOne<User>(mr => mr.Owner)
