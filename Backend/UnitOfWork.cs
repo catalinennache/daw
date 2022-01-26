@@ -9,14 +9,22 @@ namespace Chatty.Core
     {
 
         ApplicationContext _context;
-        IUserRepository _userRepo;
-        IUserRepository _contactsRepo;
-        IUserRepository _messageRepo;
+        UserRepository _userRepo;
+        ContactRepository _contactRepo;
+        MessageRepository _messageRepo;
 
-        public UnitOfWork(ApplicationContext context, IUserRepository userRepo){
+        public UnitOfWork(ApplicationContext context, UserRepository userRepo, ContactRepository contactRepo, MessageRepository messageRepo)
+        {
             _context = context;
             _userRepo = userRepo;
+            _contactRepo = contactRepo;
+            _messageRepo = messageRepo;
         }
+
+        public UserRepository GetUserRepository() { return _userRepo; }
+        public ContactRepository GetContactRepository() { return _contactRepo; }
+        public MessageRepository GetMessageRepository() { return _messageRepo; }
+
 
         // Save
         public bool Save()

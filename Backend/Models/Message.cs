@@ -1,10 +1,12 @@
+using System;
+
 namespace Chatty.Models
 {
     public class Message:BaseEntity
     {
-        public int Sender { get; set; }
-        public int Receiver { get; set; }
-
+        public Contact Contact { get; set; }
+        public string MessageContent {get; set;}
+        public long UnixTimestamp {get; set;}
     }
 
 }

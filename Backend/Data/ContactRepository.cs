@@ -8,8 +8,5 @@ namespace Chatty.Data {
 
         }
 
-        public void AddContact(Contact c){
-
-        }
     }
 }

@@ -1,21 +1,58 @@
 using Microsoft.AspNetCore.Mvc;
 using Chatty.Data;
+using Chatty.Core;
+using Chatty.Models.DTOs;
+using Chatty.Models;
+using Microsoft.AspNetCore.Authorization;
+
+
 namespace Chatty.Controllers
 {
 
 
-    [Route("")]
+    [Route("api/[controller]")]
     [ApiController]
     class AuthController : Controller
-    {   
-        IUserRepository userRepo;
-        public AuthController(IUserRepository _userRepo){
-            userRepo = _userRepo;
+    {
+        AuthService authService;
+        public AuthController(AuthService _authService)
+        {
+            authService = _authService;
         }
         [HttpGet]
         public IActionResult Hello()
         {
             return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpPost("Login")]
+        public IActionResult Login(UserRequestDTO userDto)
+        {
+            var user = new User()
+            {
+                Email = userDto.Email,
+                Password = userDto.Password
+
+            };
+            var response = authService.Authenticate(user);
+
+            return Ok(response);
+
+        }
+
+        [AllowAnonymous]
+        [HttpPost("Register")]
+        public IActionResult Register(UserRequestDTO userDto)
+        {
+            var user = new User()
+            {
+                Name = userDto.Name,
+                Email = userDto.Email,
+                Password = userDto.Password
+            };
+            var token = authService.Register(user);
+            return Ok(token);
         }
     }
 }

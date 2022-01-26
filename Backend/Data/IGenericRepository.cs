@@ -27,7 +27,7 @@ namespace Chatty.Data
         void DeleteRange(IEnumerable<TEntity> entities);
 
         // Find
-        TEntity FindById(object id);
+        public TEntity FindById(object id);
         Task<TEntity> FindByIdAsync(object id);
 
     }
