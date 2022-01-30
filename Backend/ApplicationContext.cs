@@ -12,6 +12,8 @@ namespace Chatty.Core
         }
 
         public DbSet<User> Users { set; get; }
+        public DbSet<LegalInformation> LegalInformation { set; get; }
+
         public DbSet<Contact> Contacts { set; get; }
         public DbSet<Message> Messages { set; get; }
 
@@ -34,6 +36,11 @@ namespace Chatty.Core
                    .WithMany(m3 => m3.Contacts)
                    .HasForeignKey(mr => mr.User);
 
+
+            //one to one relashionship with legalinformation table
+            builder.Entity<User>().HasOne(a => a.LegalInformation)
+                                    .WithOne(b => b.User)
+                                    .HasForeignKey<LegalInformation>(b => b.User);
 
             base.OnModelCreating(builder);
         }

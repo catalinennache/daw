@@ -10,6 +10,8 @@ namespace Chatty.Core
         public UserRepository GetUserRepository();
         public ContactRepository GetContactRepository();
         public MessageRepository GetMessageRepository();
+        public LegalInformationRepository GetLegalInformationRepository();
+
 
         public bool Save();
         public Task<bool> SaveAsync();

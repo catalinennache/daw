@@ -12,6 +12,8 @@ namespace Chatty.Models
         public string PasswordHash { get; set; }
         public IEnumerable<Contact> Contacts {get; set;}
 
+        public LegalInformation LegalInformation {get;set;}
+
 
     }
 }

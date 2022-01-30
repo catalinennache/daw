@@ -3,8 +3,10 @@ using Chatty.Core;
 using System;
 using Chatty.Models.DTOs;
 using Chatty.Models;
-using System.Collections;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
+using System.Linq;
 namespace Chatty.Controllers
 {
 
@@ -66,6 +68,34 @@ namespace Chatty.Controllers
 
             return Ok(unitOfWork.Save());
         }
+
+
+        [HttpPost("getall")]
+        public async Task<IActionResult> GetAll(Guid userId)
+        {
+            var User = unitOfWork.GetUserRepository().FindById(userId);
+            IEnumerable<Contact> contacts = await unitOfWork.GetContactRepository().GetAll();
+            IEnumerable<User> users = await unitOfWork.GetUserRepository().GetAll();
+
+            var result = contacts.Join(users,
+              (Contact x) => x.User,
+              (User y) => y.Id,
+              (Contact contact, User user) => new  // result selector
+              {
+                  Email = user.Email,
+                  Nickname = contact.NickName,
+              });
+
+
+            return Ok(unitOfWork.Save());
+        }
+
+
+
+
+
+
+
 
     }
 }
